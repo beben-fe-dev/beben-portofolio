@@ -35,11 +35,11 @@ export const ServicesSection = () => {
         transition={{ duration: 0.8 }}
         className="mb-16 text-center"
       >
-        <span className="text-xs uppercase tracking-widest text-sky-400 font-bold mb-3 inline-block">
+        <span className="text-xs uppercase tracking-widest text-primary font-bold mb-3 inline-block">
           Core Capabilities
         </span>
-        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-gradient-primary">
-          What I Do
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
+          What I <span className="text-gradient-primary">Bring to the Table</span>
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
           Disciplined engineering practices combined with modern frontend methodologies to build robust digital products that scale.
@@ -58,19 +58,19 @@ export const ServicesSection = () => {
               viewport={{ once: true, amount: 0.1 }}
             >
               <MagicCard
-                className="h-full p-8 rounded-[2rem] border border-border/80 bg-card/80"
-                gradientSize={280}
+                className="h-full p-8 rounded-[2.25rem] border border-border/80 bg-card/80 shadow-xl"
+                gradientSize={300}
                 gradientColor="rgba(139, 92, 246, 0.12)"
               >
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-muted/60 border border-border/80 flex items-center justify-center text-primary flex-shrink-0">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-xl font-bold tracking-tight text-foreground">
+                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
                     {service.title}
                   </h3>
                 </div>
-                <p className="text-muted-foreground leading-relaxed text-sm">
+                <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
                   {service.description}
                 </p>
               </MagicCard>

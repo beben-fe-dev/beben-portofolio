@@ -7,7 +7,7 @@ import {
   MotionValue,
 } from "framer-motion";
 import { cn } from "../lib/utils";
-import { Card, CardContent } from "./card";
+import { MagicCard } from "./magic-card";
 import { Calendar } from "lucide-react";
 
 export interface TimelineEvent {
@@ -141,19 +141,6 @@ export const ScrollTimeline = ({
   };
 
   const getCardClasses = (index: number) => {
-    const baseClasses = "relative z-30 rounded-lg transition-all duration-300";
-    const variantClasses = {
-      default: "bg-card border shadow-sm",
-      elevated: "bg-card border border-border/40 shadow-md",
-      outlined: "bg-card/50 backdrop-blur border-2 border-primary/20",
-      filled: "bg-primary/10 border border-primary/30",
-    };
-    const effectClasses = {
-      none: "",
-      glow: "hover:shadow-[0_0_15px_rgba(var(--primary-rgb)/0.5)]",
-      shadow: "hover:shadow-lg hover:-translate-y-1",
-      bounce: "hover:scale-[1.03] hover:shadow-md active:scale-[0.97]",
-    };
     const alignmentClassesDesktop =
       cardAlignment === "alternating"
         ? index % 2 === 0
@@ -163,11 +150,8 @@ export const ScrollTimeline = ({
         ? "lg:mr-auto lg:ml-0"
         : "lg:ml-auto lg:mr-0";
     return cn(
-      baseClasses,
-      variantClasses[cardVariant],
-      effectClasses[cardEffect],
-      alignmentClassesDesktop,
-      "w-full lg:w-[calc(50%-40px)]"
+      "relative z-30 w-full lg:w-[calc(50%-40px)]",
+      alignmentClassesDesktop
     );
   };
 
@@ -224,9 +208,14 @@ export const ScrollTimeline = ({
         className
       )}
     >
-      <div className="text-center py-16 px-4">
-        <h2 className="text-3xl md:text-5xl font-bold mb-4">{title}</h2>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+      <div className="flex flex-col items-center text-center mb-16 pt-14 px-4">
+        <span className="text-xs uppercase tracking-widest text-primary font-bold mb-3 inline-block">
+          Career Timeline
+        </span>
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
+          Professional <span className="text-gradient-primary">Experience</span>
+        </h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
           {subtitle}
         </p>
       </div>
@@ -335,42 +324,37 @@ export const ScrollTimeline = ({
                     viewport={animationProps.viewport}
                     style={parallaxIntensity > 0 ? { y: yOffset } : undefined}
                   >
-                    <Card className="bg-background border">
-                      <CardContent className="p-6">
-                        {dateFormat === "badge" ? (
-                          <div className="flex items-center mb-2">
-                            {event.icon || (
-                              <Calendar className="h-4 w-4 mr-2 text-primary" />
-                            )}
-                            <span
-                              className={cn(
-                                "text-sm font-bold",
-                                event.color
-                                  ? `text-${event.color}`
-                                  : "text-primary"
-                              )}
-                            >
-                              {event.year}
-                            </span>
-                          </div>
-                        ) : (
-                          <p className="text-lg font-bold text-primary mb-2">
-                            {event.year}
-                          </p>
-                        )}
-                        <h3 className="text-xl font-bold mb-1">
-                          {event.title}
-                        </h3>
-                        {event.subtitle && (
-                          <p className="text-muted-foreground font-medium mb-2">
-                            {event.subtitle}
-                          </p>
-                        )}
-                        <p className="text-muted-foreground">
-                          {event.description}
+                    <MagicCard
+                      className="h-full p-8 rounded-[2.25rem] border border-border/80 bg-card/80 shadow-xl relative overflow-hidden text-left group"
+                      gradientSize={320}
+                      gradientColor="rgba(139, 92, 246, 0.12)"
+                    >
+                      {/* Period Badge & Role Index */}
+                      <div className="flex items-center justify-between gap-3 mb-5 pb-4 border-b border-border/60">
+                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-mono font-bold">
+                          {event.icon || <Calendar className="h-3.5 w-3.5" />}
+                          <span>{event.year}</span>
+                        </span>
+                        <span className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider font-semibold">
+                          Role 0{index + 1}
+                        </span>
+                      </div>
+
+                      {/* Title & Subtitle */}
+                      <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight mb-1 group-hover:text-primary transition-colors">
+                        {event.title}
+                      </h3>
+                      {event.subtitle && (
+                        <p className="text-sm font-semibold text-primary mb-4">
+                          {event.subtitle}
                         </p>
-                      </CardContent>
-                    </Card>
+                      )}
+
+                      {/* Description */}
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {event.description}
+                      </p>
+                    </MagicCard>
                   </motion.div>
                 </div>
               );

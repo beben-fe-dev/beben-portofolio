@@ -8,7 +8,7 @@ export const CareerTimeline = () => {
       title: "Building Frontend / Developer",
       subtitle: "First Borneo Group · AgriTech & Enterprise",
       description:
-        "Developing internal dashboard applications from scratch with a modular, scalable architecture. Engineered ultra-lightweight, performance-optimized dashboards tailored for plantation field workers in low-bandwidth environments (<15KB payload budget). Translated business requirements into structured technical docs and guided user digital onboarding.",
+        "Developing enterprise dashboard applications and React Native mobile modules from scratch with a modular, scalable architecture. Engineered ultra-lightweight, performance-optimized web & React Native applications tailored for plantation field workers in low-bandwidth environments (<15KB payload budget). Translated business requirements into structured technical docs and guided user digital onboarding.",
       icon: <Globe className="h-4 w-4 mr-2 text-emerald-400" />,
     },
     {
@@ -16,7 +16,7 @@ export const CareerTimeline = () => {
       title: "Senior Frontend Engineer",
       subtitle: "Bang Jamin · Insurtech (GoTo Partner)",
       description:
-        "Spearheaded the Claim Feature Bang Jamin x GoTo for seamless submission & tracking. Architected the Partner Dashboard with real-time analytics and service management. Built Internal Claim Dashboard reducing approval turnaround to <3 minutes. Collaborated closely with GoTo teams delivering high-security API integrations.",
+        "Spearheaded the Claim Feature Bang Jamin x GoTo for seamless submission & tracking. Engineered the React Native mobile claim application for iOS & Android, allowing policyholders to photograph damage, upload documents, and track settlement status. Architected the Partner Dashboard with real-time analytics and built Internal Claim Dashboard reducing approval turnaround to <3 minutes.",
       icon: <Shield className="h-4 w-4 mr-2 text-sky-400" />,
     },
     {

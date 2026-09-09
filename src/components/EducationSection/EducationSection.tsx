@@ -47,17 +47,15 @@ export const EducationSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="mb-12"
+          className="flex flex-col items-center text-center mb-16"
         >
-          <div className="flex items-center gap-4 mb-3">
-            <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/25 flex items-center justify-center text-primary shadow-md">
-              <GraduationCap className="w-6 h-6" />
-            </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
-              Academic <span className="text-gradient-primary">Background</span>
-            </h2>
-          </div>
-          <p className="text-muted-foreground text-lg max-w-2xl">
+          <span className="text-xs uppercase tracking-widest text-primary font-bold mb-3 inline-block">
+            Academic Foundation
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
+            Educational <span className="text-gradient-primary">Background</span>
+          </h2>
+          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             Strong theoretical computer science foundation and interactive graphics specialization powering high-performance frontend engineering.
           </p>
         </motion.div>

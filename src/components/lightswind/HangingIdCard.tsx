@@ -301,7 +301,7 @@ export const HangingIdCard = ({
         </div>
 
         {/* ID Card */}
-        <div className={cn("relative rounded-[1.75rem] overflow-hidden shadow-2xl border border-foreground/15 dark:border-white/15 bg-card pointer-events-none mt-[-16px]", cardWidth)}>
+        <div className={cn("relative rounded-[1.75rem] overflow-hidden shadow-2xl border border-border/80 bg-card pointer-events-none mt-[-16px]", cardWidth)}>
           {/* Punched Slot Hole for Lanyard Clip */}
           <div className="absolute top-2.5 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
             <div className="w-9 h-2.5 rounded-full bg-black/70 dark:bg-black/90 border border-white/30 shadow-inner flex items-center justify-center">
@@ -380,7 +380,7 @@ export const HangingIdCard = ({
       </div>
 
       {/* Drag hint */}
-      <p className="mt-8 text-[11px] text-zinc-400 dark:text-zinc-600 font-medium select-none pointer-events-none">
+      <p className="mt-8 text-[11px] text-muted-foreground font-medium select-none pointer-events-none">
         Drag or click the card
       </p>
     </div>

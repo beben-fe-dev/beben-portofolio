@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Code2, Award, Layout, GraduationCap } from "lucide-react";
+import { MagicCard } from "../lightswind/magic-card";
 
 const stats = [
   { icon: <Layout className="w-6 h-6" />, label: "Years Experience", value: "7+" },
@@ -20,7 +21,7 @@ export const AboutSection = () => {
       >
         <div className="flex-1 space-y-6 text-left">
           <div>
-            <span className="text-xs uppercase tracking-widest text-sky-400 font-bold mb-3 inline-block">
+            <span className="text-xs uppercase tracking-widest text-primary font-bold mb-3 inline-block">
               Background &amp; Philosophy
             </span>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
@@ -39,18 +40,25 @@ export const AboutSection = () => {
           {stats.map((stat, i) => (
             <motion.div
               key={i}
-              className="glass-panel p-6 rounded-2xl border border-foreground/10 hover:border-primary/50 transition-colors group relative overflow-hidden"
+              className="h-full"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <div className="absolute -right-6 -top-6 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-colors" />
-              <div className="text-primary mb-4 p-3 bg-primary/10 w-max rounded-xl">
-                {stat.icon}
-              </div>
-              <h3 className="text-3xl font-bold text-foreground mb-1">{stat.value}</h3>
-              <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
+              <MagicCard
+                className="h-full p-6 rounded-[2rem] border border-border/80 bg-card/80 shadow-xl relative overflow-hidden flex flex-col justify-between"
+                gradientSize={260}
+                gradientColor="rgba(139, 92, 246, 0.12)"
+              >
+                <div className="w-12 h-12 rounded-2xl bg-muted/60 border border-border/80 flex items-center justify-center text-primary mb-4 flex-shrink-0">
+                  {stat.icon}
+                </div>
+                <div>
+                  <h3 className="text-3xl font-black text-foreground tracking-tight mb-1">{stat.value}</h3>
+                  <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
+                </div>
+              </MagicCard>
             </motion.div>
           ))}
         </div>

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { MagicCard } from "../lightswind/magic-card";
 import {
   Atom,
   Code2,
@@ -11,16 +12,20 @@ import {
   Workflow,
   Eye,
   ShieldCheck,
-  Database
+  Database,
+  Smartphone,
+  Cpu
 } from "lucide-react";
 
 export default function ProfessionalProfile() {
   const technicalSkills = [
-    { name: "ReactJS & Next.js (App Router, SSR)", level: 96, icon: Atom, color: "text-cyan-400" },
-    { name: "TypeScript & Static Type Contracts", level: 95, icon: Code2, color: "text-blue-400" },
+    { name: "ReactJS / React 19", level: 96, icon: Atom, color: "text-cyan-400" },
+    { name: "React Native (iOS & Android)", level: 95, icon: Smartphone, color: "text-emerald-400" },
+    { name: "Next.js (App Router, SSR/SSG)", level: 95, icon: Layers, color: "text-sky-400" },
+    { name: "TypeScript & Strict Type Contracts", level: 95, icon: Code2, color: "text-blue-400" },
     { name: "Tailwind CSS & Design Systems", level: 94, icon: Sparkles, color: "text-purple-400" },
-    { name: "Zustand & Redux State Engines", level: 92, icon: Layers, color: "text-emerald-400" },
-    { name: "Three.js, WebGL & Canvas Graphics", level: 86, icon: Box, color: "text-amber-400" },
+    { name: "Zustand & Redux State Engines", level: 92, icon: Cpu, color: "text-amber-400" },
+    { name: "Three.js & WebGL Shaders", level: 86, icon: Box, color: "text-orange-400" },
     { name: "Firebase, REST & GraphQL APIs", level: 90, icon: Database, color: "text-rose-400" },
   ];
 
@@ -78,7 +83,7 @@ export default function ProfessionalProfile() {
   return (
     <motion.section
       id="skills"
-      className="space-y-8"
+      className="space-y-8 pt-6"
       initial={{ opacity: 0 }}
       whileInView={{
         opacity: 1,
@@ -86,21 +91,36 @@ export default function ProfessionalProfile() {
       }}
       viewport={{ once: true, amount: 0.2 }}
     >
-      <div className="flex items-center gap-3 mb-2">
-        <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-          <Code2 className="w-5 h-5" />
-        </div>
-        <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-foreground">Expertise &amp; Skills</h3>
+      <div className="flex flex-col items-center text-center mb-16">
+        <span className="text-xs uppercase tracking-widest text-primary font-bold mb-3 inline-block">
+          Engineering Proficiencies
+        </span>
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
+          Core Stack &amp; <span className="text-gradient-primary">Capabilities</span>
+        </h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+          Mastery across modern web frameworks, React Native mobile applications, reactive state engines, and frontend craftsmanship.
+        </p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Technical Skills */}
-        <div className="glass-panel p-8 rounded-[2rem] border border-foreground/15 shadow-xl relative overflow-hidden flex flex-col justify-between">
+        <MagicCard
+          className="h-full p-8 rounded-[2.25rem] border border-border/80 bg-card/80 shadow-xl relative overflow-hidden flex flex-col justify-between"
+          gradientSize={300}
+          gradientColor="rgba(139, 92, 246, 0.12)"
+        >
           <div>
             <div className="flex items-center justify-between mb-8 pb-4 border-b border-border/60">
-              <h4 className="text-xl font-bold text-foreground flex items-center gap-2">
-                <Code2 className="w-5 h-5 text-primary" /> Technical Arsenal
-              </h4>
+              <div className="flex items-center gap-3.5">
+                <div className="w-12 h-12 rounded-2xl bg-muted/60 border border-border/80 flex items-center justify-center text-primary flex-shrink-0">
+                  <Code2 className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-foreground">Core Technologies</h4>
+                  <p className="text-xs text-muted-foreground font-medium">Production frameworks &amp; languages</p>
+                </div>
+              </div>
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground bg-muted/60 px-3 py-1 rounded-full border border-border/50">
                 Mastery
               </span>
@@ -138,17 +158,27 @@ export default function ProfessionalProfile() {
               })}
             </div>
           </div>
-        </div>
+        </MagicCard>
 
         {/* Frontend Engineering Professional Traits */}
-        <div className="glass-panel p-8 rounded-[2rem] border border-foreground/15 shadow-xl relative overflow-hidden flex flex-col justify-between">
+        <MagicCard
+          className="h-full p-8 rounded-[2.25rem] border border-border/80 bg-card/80 shadow-xl relative overflow-hidden flex flex-col justify-between"
+          gradientSize={300}
+          gradientColor="rgba(139, 92, 246, 0.12)"
+        >
           <div>
             <div className="flex items-center justify-between mb-6 pb-4 border-b border-border/60">
-              <h4 className="text-xl font-bold text-foreground flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-primary" /> Professional Traits
-              </h4>
+              <div className="flex items-center gap-3.5">
+                <div className="w-12 h-12 rounded-2xl bg-muted/60 border border-border/80 flex items-center justify-center text-primary flex-shrink-0">
+                  <Sparkles className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-foreground">Engineering Mindset</h4>
+                  <p className="text-xs text-muted-foreground font-medium">Standards, performance &amp; UX traits</p>
+                </div>
+              </div>
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground bg-muted/60 px-3 py-1 rounded-full border border-border/50">
-                Frontend Mindset
+                Philosophy
               </span>
             </div>
 
@@ -182,7 +212,7 @@ export default function ProfessionalProfile() {
               Consistently delivering production-grade web systems with zero compromise on UI craft, runtime performance, and accessibility.
             </p>
           </div>
-        </div>
+        </MagicCard>
       </div>
     </motion.section>
   );

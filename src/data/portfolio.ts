@@ -35,18 +35,18 @@ export const portfolioData = {
     name: "Bento Putra Hermanto",
     shortName: "Bento",
     initials: "BH",
-    role: "Senior Frontend Engineer",
+    role: "Senior Frontend & Mobile Engineer",
     availability: "Available for Senior Roles & Architecture Consulting",
     tagline: "Architecture. Performance. Craftsmanship.",
-    bio: "Experienced Frontend Engineer with 7+ years of track record building scalable, high-performance web systems and fluid user interfaces. Graduated in Computer Science from Bina Nusantara University (GPA 3.58) with a Game Application minor, I specialize in enterprise dashboards, e-commerce engines, and high-frequency fintech and agritech platforms.",
+    bio: "Experienced Senior Frontend Engineer with 7+ years of track record building scalable web applications and cross-platform mobile systems (React 19, Next.js, React Native). Graduated in Computer Science from Bina Nusantara University (GPA 3.58) with a Game Application minor. Currently developing enterprise suites and React Native mobile modules at First Borneo Group, with previous senior engineering impact at Bang Jamin (GoTo Partner), Pintarnya, and Ruparupa.",
     location: "Jakarta, Indonesia",
     email: "bentoputrahermanto@gmail.com",
     whatsapp: "+62859106530700",
     whatsappUrl: "https://wa.me/62859106530700",
     github: "https://github.com/beben-fe-dev",
     stats: [
-      { value: "7+", label: "Years Experience", desc: "Production-grade frontend engineering" },
-      { value: "20+", label: "Projects Delivered", desc: "Enterprise & consumer web systems" },
+      { value: "7+", label: "Years Experience", desc: "Production web & mobile engineering" },
+      { value: "20+", label: "Projects Delivered", desc: "Enterprise & consumer web/mobile apps" },
       { value: "3.58", label: "Binus CS GPA", desc: "Minor in Game Application" },
       { value: "100%", label: "Code Quality", desc: "Zero compromise on craft & speed" }
     ]
@@ -55,17 +55,17 @@ export const portfolioData = {
   services: [
     {
       id: "architecture",
-      title: "Frontend & System Architecture",
-      desc: "Architecting modular, maintainable web systems using React 19, Next.js App Router, SSR/SSG, and scalable state machines.",
+      title: "Web & React Native Architecture",
+      desc: "Architecting modular, maintainable web systems and cross-platform iOS & Android mobile apps using React 19, Next.js, and React Native.",
       icon: "Layers",
       gradient: "from-sky-500/20 to-blue-500/5",
       borderColor: "border-sky-500/20",
-      points: ["Microfrontends & Modular SPAs", "Next.js Server Components & SSR", "Zustand & Redux State Engines", "Custom API Wrapper Abstractions"]
+      points: ["React Native (iOS & Android)", "Next.js App Router & SSR", "Zustand & Redux State Engines", "Custom API Wrapper Abstractions"]
     },
     {
       id: "uiux",
       title: "UI/UX & Design Engineering",
-      desc: "Translating complex design tokens into pixel-perfect Tailwind CSS with Emil Kowalski-inspired fluid motion and full accessibility.",
+      desc: "Translating complex design tokens into pixel-perfect Tailwind CSS and React Native styling with fluid motion and full accessibility.",
       icon: "Palette",
       gradient: "from-purple-500/20 to-pink-500/5",
       borderColor: "border-purple-500/20",
@@ -74,11 +74,11 @@ export const portfolioData = {
     {
       id: "performance",
       title: "Performance & Low-Bandwidth",
-      desc: "Optimizing bundle budgets, virtualized DOM rendering, and offline-first caching for challenging networks and field operations.",
+      desc: "Optimizing bundle budgets, virtualized DOM/lists, and offline-first caching for challenging networks and field operations.",
       icon: "Zap",
       gradient: "from-emerald-500/20 to-teal-500/5",
       borderColor: "border-emerald-500/20",
-      points: ["Sub-second Time-to-Interactive (TTI)", "Under 15KB Payload Budgets", "Offline-First Service Workers", "Core Web Vitals Perfection"]
+      points: ["Sub-second Time-to-Interactive (TTI)", "Under 15KB Payload Budgets", "Offline-First Sync Protocols", "Core Web Vitals Perfection"]
     },
     {
       id: "spatial",
@@ -95,10 +95,10 @@ export const portfolioData = {
     {
       id: "bangjamin",
       title: "Bang Jamin x GoTo Insurtech Ecosystem",
-      subtitle: "Insurance Claim Automation & Real-time Partner Engine",
-      description: "End-to-end claim submission feature and partner management dashboard built in close collaboration with GoTo teams. Reduced approval turnaround to <3 minutes with automated verification.",
+      subtitle: "Insurance Claim Automation & Real-time Partner Engine (Web & React Native)",
+      description: "End-to-end claim submission feature, partner management dashboard, and React Native mobile flows built in close collaboration with GoTo teams. Reduced approval turnaround to <3 minutes.",
       image: "/projects/bangjamin.webp",
-      tags: ["ReactJS", "TypeScript", "GoTo APIs", "Zustand", "Tailwind CSS"],
+      tags: ["React Native", "ReactJS", "TypeScript", "GoTo APIs", "Zustand"],
       metrics: "99.8% Claim SLA · <3 Min Turnaround",
       colSpan: "md:col-span-7",
       link: "https://bangjamin.com"
@@ -128,10 +128,10 @@ export const portfolioData = {
     {
       id: "firstborneo",
       title: "First Borneo Group AgriTech Suite",
-      subtitle: "Enterprise Field Operation & Telemetry Dashboard",
-      description: "Built from scratch for plantation field workers operating in low-bandwidth remote environments. Features offline caching, instant synchronization, and ultra-lightweight payload budgets.",
+      subtitle: "Field Operation & Telemetry Dashboard with React Native Mobile",
+      description: "Built from scratch for plantation field workers operating in low-bandwidth remote environments. Features offline caching, instant mobile synchronization, and ultra-lightweight payload budgets.",
       image: "/projects/firstborneo.webp",
-      tags: ["React 19", "TypeScript", "Offline-First", "Low-Bandwidth UX"],
+      tags: ["React Native", "React 19", "TypeScript", "Offline-First", "Low-Bandwidth UX"],
       metrics: "<15 KB Payload · 100% Adoption",
       colSpan: "md:col-span-7",
       link: "https://wa.me/62859106530700"
@@ -151,12 +151,12 @@ export const portfolioData = {
       bullets: [
         "Gathered and analyzed functional requirements from plantation field workers, branch offices, and headquarters to define clear frontend specifications.",
         "Translated business logic into structured technical documentation, user flows, and UI implementation plans for internal operational dashboards.",
-        "Developed enterprise dashboard applications from scratch with a modular, scalable architecture complying with high-fidelity UI/UX standards.",
-        "Engineered ultra-lightweight, performance-optimized dashboards tailored for field operations in low-bandwidth environments (<15KB payload budget).",
-        "Collaborated closely with UI/UX designers and backend engineers to ensure seamless API integration and consistent user experience.",
+        "Developed enterprise dashboard applications and React Native mobile modules from scratch, implementing responsive and scalable architecture aligned with UI/UX standards.",
+        "Engineered ultra-lightweight, performance-optimized dashboards and mobile views tailored for field operations in low-bandwidth environments (<15KB payload budget).",
+        "Collaborated closely with UI/UX designers and backend engineers to ensure seamless API integration and consistent user experience across web and mobile.",
         "Conducted product walkthroughs and digital onboarding sessions, helping plantation workers successfully transition from manual paper to digital systems."
       ],
-      stack: ["React 19", "TypeScript", "Tailwind CSS", "Offline Cache", "Low-Bandwidth UX"]
+      stack: ["React Native", "React 19", "TypeScript", "Tailwind CSS", "Offline Cache", "Low-Bandwidth UX"]
     },
     {
       id: "bangjamin",
@@ -169,13 +169,13 @@ export const portfolioData = {
       badgeColor: "#38bdf8",
       bullets: [
         "Spearheaded the Claim Feature Bang Jamin x GoTo, making insurance claim submission and automated tracking fast, user-friendly, and transparent.",
+        "Engineered the React Native mobile claim application for Bang Jamin x GoTo ecosystem, allowing users to capture incident photos, submit claims, and track settlement status on iOS and Android.",
         "Architected the Partner Dashboard Bang Jamin x GoTo, delivering real-time insights into service management, performance metrics, and settlement status.",
         "Engineered the Internal Claim Review Dashboard, enabling rapid review and approval workflows that reduced document verification turnaround to <3 minutes.",
         "Collaborated closely with Bang Jamin and GoTo cross-functional engineering teams to ensure high-security, scalable partner integration.",
-        "Created company-wide internal operational dashboards for finance and underwriting operations.",
-        "Revamped the public-facing web interface to improve accessibility, conversion rates, and mobile user engagement."
+        "Revamped the web and mobile interfaces to improve accessibility, conversion rates, and mobile user engagement."
       ],
-      stack: ["ReactJS", "TypeScript", "GoTo APIs", "Zustand", "Partner Microfrontends"]
+      stack: ["React Native", "ReactJS", "TypeScript", "GoTo APIs", "Zustand", "Mobile Claim Flow"]
     },
     {
       id: "pintarnya",
@@ -289,12 +289,12 @@ export const portfolioData = {
 
   skills: [
     {
-      title: "Core Frontend Frameworks",
+      title: "Core Web & Mobile Frameworks",
       icon: "Code2",
       skills: [
         { name: "ReactJS / React 19", level: "Expert" },
+        { name: "React Native (iOS & Android)", level: "Expert" },
         { name: "Next.js (App Router, SSR/SSG)", level: "Expert" },
-        { name: "React Native", level: "Advanced" },
         { name: "HTML5 & Semantic DOM", level: "Expert" },
         { name: "CSS3 / Modern Layouts", level: "Expert" }
       ]
@@ -325,7 +325,7 @@ export const portfolioData = {
         { name: "REST APIs & Contract Schemas", level: "Expert" },
         { name: "Firebase (Auth, Firestore, Hosting)", level: "Advanced" },
         { name: "Git, GitHub Actions & CI/CD", level: "Expert" },
-        { name: "Vite, Bun & Webpack", level: "Advanced" }
+        { name: "Vite, Metro & Webpack", level: "Advanced" }
       ]
     }
   ]
