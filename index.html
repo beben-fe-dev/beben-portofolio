@@ -1,15 +1,29 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' shape-rendering='crispEdges'><path d='M3 0h6v1H2v1h9V1H9V0H3z' fill='%23e52521'/><path d='M1 2h2v4H1zm8 0h2v1H9zm1 1h1v2h-1z' fill='%23804000'/><path d='M3 2h6v2H3zm1 2h5v1H4zm0 1h7v1H4zm1 1h4v1H5z' fill='%23fcc0a0'/><path d='M5 2h1v2H5zm3 0h1v2H8z' fill='%23000'/><path d='M3 5h6v1H3z' fill='%23804000'/></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bento Putra Hermanto - Portfolio</title>
+    <title>Bento Putra Hermanto — Senior Frontend Engineer</title>
+    <meta name="description" content="Senior Frontend Engineer with 7+ years track record building scalable enterprise web systems, responsive dashboards, and fluid interfaces across Insurtech, E-Commerce, and AgriTech." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Silkscreen:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem("theme");
+          if (saved === "light") {
+            document.documentElement.classList.remove("dark");
+          } else {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
-  <body class="bg-[#111118] text-white overflow-x-hidden">
+  <body class="bg-background text-foreground antialiased min-h-screen selection:bg-sky-500/30 selection:text-sky-400">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
