@@ -23,7 +23,7 @@ export const EducationSection = () => {
     {
       degree: "Game Application Minor Specialization",
       school: "Bina Nusantara University (BINUS)",
-      year: "2018 – 2020",
+      year: "2016 – 2020",
       badge: "Interactive Graphics Minor",
       badgeIcon: Sparkles,
       badgeColor: "text-primary bg-primary/10 border-primary/30",

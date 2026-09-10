@@ -48,18 +48,18 @@ export const ContactSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.8 }}
-        className="glass-panel p-8 md:p-12 rounded-[2.5rem] border border-border/80 relative overflow-hidden shadow-xl"
+        className="glass-panel p-6 sm:p-8 md:p-12 rounded-[2rem] md:rounded-[2.5rem] border border-border/80 relative overflow-hidden shadow-xl"
       >
         {/* Background Gradients */}
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/20 blur-[100px] rounded-full pointer-events-none" />
         <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col md:flex-row gap-12 md:gap-16">
+        <div className="relative z-10 flex flex-col md:flex-row gap-8 md:gap-16">
           
           {/* Contact Info */}
-          <div className="flex-1 space-y-8 text-left">
+          <div className="flex-1 space-y-6 sm:space-y-8 text-left">
             <div>
-              <h3 className="text-2xl font-bold tracking-tight mb-3 text-foreground">
+              <h3 className="text-xl sm:text-2xl font-bold tracking-tight mb-2 sm:mb-3 text-foreground">
                 Get in Touch Directly
               </h3>
               <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
@@ -67,17 +67,17 @@ export const ContactSection = () => {
               </p>
             </div>
 
-            <div className="space-y-5">
+            <div className="space-y-4 sm:space-y-5">
               <div 
                 onClick={copyEmail}
-                className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors cursor-pointer group"
+                className="flex items-center gap-3.5 sm:gap-4 text-muted-foreground hover:text-primary transition-colors cursor-pointer group select-none min-w-0"
               >
-                <div className="w-12 h-12 rounded-full glass-panel flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                   {copied ? <Check className="w-5 h-5 text-emerald-400" /> : <Mail className="w-5 h-5" />}
                 </div>
-                <div>
-                  <span className="text-[11px] uppercase tracking-wider text-zinc-500 block">Email Address (Click to Copy)</span>
-                  <span className="font-semibold text-foreground">bentoputrahermanto@gmail.com</span>
+                <div className="min-w-0 flex-1">
+                  <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-muted-foreground block font-medium">Email Address (Click to Copy)</span>
+                  <span className="font-semibold text-foreground text-xs sm:text-sm md:text-base break-all sm:break-normal block">bentoputrahermanto@gmail.com</span>
                 </div>
               </div>
 
@@ -85,60 +85,63 @@ export const ContactSection = () => {
                 href="https://wa.me/62859106530700" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 text-muted-foreground hover:text-emerald-400 transition-colors group"
+                className="flex items-center gap-3.5 sm:gap-4 text-muted-foreground hover:text-emerald-400 transition-colors group min-w-0"
               >
-                <div className="w-12 h-12 rounded-full glass-panel flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                   <MessageSquare className="w-5 h-5 text-emerald-400" />
                 </div>
-                <div>
-                  <span className="text-[11px] uppercase tracking-wider text-zinc-500 block">WhatsApp Instant Chat</span>
-                  <span className="font-semibold text-foreground">+62 859-1065-30700</span>
+                <div className="min-w-0 flex-1">
+                  <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-muted-foreground block font-medium">WhatsApp Instant Chat</span>
+                  <span className="font-semibold text-foreground text-xs sm:text-sm md:text-base block">+62 859-1065-30700</span>
                 </div>
               </a>
 
-              <div className="flex items-center gap-4 text-muted-foreground group">
-                <div className="w-12 h-12 rounded-full glass-panel flex items-center justify-center">
+              <div className="flex items-center gap-3.5 sm:gap-4 text-muted-foreground group min-w-0">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-5 h-5 text-rose-400" />
                 </div>
-                <div>
-                  <span className="text-[11px] uppercase tracking-wider text-zinc-500 block">Location</span>
-                  <span className="font-semibold text-foreground">Jakarta, Indonesia</span>
+                <div className="min-w-0 flex-1">
+                  <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-muted-foreground block font-medium">Location</span>
+                  <span className="font-semibold text-foreground text-xs sm:text-sm md:text-base block">Jakarta, Indonesia</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Direct Message Action Card */}
-          <div className="flex-1 glass-panel p-8 rounded-[2rem] border border-foreground/10 relative text-left">
-            <form className="space-y-5" onSubmit={handleSendWhatsApp}>
+          {/* Direct Message Action Card - Seamless Integrated Form */}
+          <div className="flex-1 p-0 sm:p-6 md:p-8 rounded-2xl md:bg-card/40 md:border md:border-border/40 relative text-left">
+            <form className="space-y-4 sm:space-y-5" onSubmit={handleSendWhatsApp}>
               <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-1.5">Your Name</label>
+                <label className="block text-xs sm:text-sm font-medium text-muted-foreground mb-1.5">Your Name</label>
                 <Input 
                   type="text" 
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="rounded-xl py-3 px-4 bg-foreground/5 border-foreground/10 text-foreground focus-visible:ring-primary placeholder:text-muted-foreground/50"
+                  className="w-full h-12 rounded-xl py-3 px-4 bg-foreground/5 border-foreground/10 text-foreground text-base focus-visible:ring-primary placeholder:text-muted-foreground/50"
                   placeholder="e.g. Bento Putra Hermanto"
+                  required
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-1.5">Brief Message / Project Scope</label>
+                <label className="block text-xs sm:text-sm font-medium text-muted-foreground mb-1.5">Brief Message / Project Scope</label>
                 <Textarea 
                   rows={4} 
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="rounded-xl py-3 px-4 bg-foreground/5 border-foreground/10 text-foreground focus-visible:ring-primary placeholder:text-muted-foreground/50"
+                  className="w-full rounded-xl py-3 px-4 bg-foreground/5 border-foreground/10 text-foreground text-base focus-visible:ring-primary placeholder:text-muted-foreground/50 min-h-[120px]"
                   placeholder="Tell me about the engineering challenge, timeline, or role..."
+                  required
                 />
               </div>
 
               <Button 
                 type="submit" 
                 size="lg" 
-                className="w-full rounded-xl h-12 bg-primary text-primary-foreground font-semibold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]"
+                className="w-full rounded-xl h-12 bg-primary text-primary-foreground font-semibold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] active:scale-[0.98]"
               >
-                Send via WhatsApp <Send className="w-4 h-4" />
+                <span>Send via WhatsApp</span>
+                <Send className="w-4 h-4" />
               </Button>
             </form>
           </div>
