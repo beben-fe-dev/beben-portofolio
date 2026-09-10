@@ -47,12 +47,11 @@ export function ThemeToggle({
 }: ToggleThemeProps) {
   const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window !== "undefined") {
-      return (
-        document.documentElement.classList.contains("dark") ||
-        localStorage.getItem("theme") === "dark"
-      );
+      const saved = localStorage.getItem("theme");
+      if (saved) return saved === "dark";
+      return document.documentElement.classList.contains("dark");
     }
-    return true;
+    return false;
   });
 
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -90,6 +89,20 @@ export function ThemeToggle({
     }
   }, []);
 
+  const applyTheme = useCallback((targetDark: boolean) => {
+    setIsDark(targetDark);
+    if (targetDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    try {
+      localStorage.setItem("theme", targetDark ? "dark" : "light");
+    } catch {
+      // Ignore storage errors in restricted contexts
+    }
+  }, []);
+
   const toggleTheme = useCallback(async () => {
     const currentAnimation: AnimationType =
       animationType === "random"
@@ -98,237 +111,234 @@ export function ThemeToggle({
 
     const newTheme = !isDark;
 
-    // Fallback for browsers that do not support View Transitions
+    // Fallback if View Transitions API is not supported or throws
     if (!(document as any).startViewTransition) {
-      setIsDark(newTheme);
-      if (newTheme) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-      localStorage.setItem("theme", newTheme ? "dark" : "light");
+      applyTheme(newTheme);
       return;
     }
 
-    const transition = (document as any).startViewTransition(() => {
-      flushSync(() => {
-        setIsDark(newTheme);
-        if (newTheme) {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
-        localStorage.setItem("theme", newTheme ? "dark" : "light");
+    try {
+      const transition = (document as any).startViewTransition(() => {
+        flushSync(() => {
+          applyTheme(newTheme);
+        });
       });
-    });
 
-    await transition.ready;
+      // Spatial animation with safe WebKit / Mobile Safari fallback
+      try {
+        await transition.ready;
 
-    // Calculate coordinates and dimensions for spatial animations
-    const btn = buttonRef.current;
-    const left = btn ? btn.getBoundingClientRect().left : window.innerWidth / 2;
-    const top = btn ? btn.getBoundingClientRect().top : window.innerHeight / 2;
-    const width = btn ? btn.getBoundingClientRect().width : 40;
-    const height = btn ? btn.getBoundingClientRect().height : 40;
+        // Calculate coordinates and dimensions for spatial animations
+        const btn = buttonRef.current;
+        const left = btn ? btn.getBoundingClientRect().left : window.innerWidth / 2;
+        const top = btn ? btn.getBoundingClientRect().top : window.innerHeight / 2;
+        const width = btn ? btn.getBoundingClientRect().width : 40;
+        const height = btn ? btn.getBoundingClientRect().height : 40;
 
-    const x = left + width / 2;
-    const y = top + height / 2;
-    const maxRadius = Math.hypot(
-      Math.max(left, window.innerWidth - left),
-      Math.max(top, window.innerHeight - top)
-    );
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-
-    switch (currentAnimation) {
-      case "circle-spread":
-        document.documentElement.animate(
-          {
-            clipPath: [
-              `circle(0px at ${x}px ${y}px)`,
-              `circle(${maxRadius}px at ${x}px ${y}px)`,
-            ],
-          },
-          {
-            duration,
-            easing: "ease-in-out",
-            pseudoElement: "::view-transition-new(root)",
-          }
+        const x = left + width / 2;
+        const y = top + height / 2;
+        const maxRadius = Math.hypot(
+          Math.max(left, window.innerWidth - left),
+          Math.max(top, window.innerHeight - top)
         );
-        break;
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
 
-      case "round-morph":
-        document.documentElement.animate(
-          [
-            { opacity: 0, transform: "scale(0.8) rotate(5deg)" },
-            { opacity: 1, transform: "scale(1) rotate(0deg)" },
-          ],
-          {
-            duration: duration * 1.2,
-            easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
-            pseudoElement: "::view-transition-new(root)",
-          }
-        );
-        break;
+        switch (currentAnimation) {
+          case "circle-spread":
+            document.documentElement.animate(
+              {
+                clipPath: [
+                  `circle(0px at ${x}px ${y}px)`,
+                  `circle(${maxRadius}px at ${x}px ${y}px)`,
+                ],
+              },
+              {
+                duration,
+                easing: "ease-in-out",
+                pseudoElement: "::view-transition-new(root)",
+              }
+            );
+            break;
 
-      case "swipe-left":
-        document.documentElement.animate(
-          {
-            clipPath: [
-              `inset(0 0 0 ${viewportWidth}px)`,
-              `inset(0 0 0 0)`,
-            ],
-          },
-          {
-            duration,
-            easing: "cubic-bezier(0.2, 0, 0, 1)",
-            pseudoElement: "::view-transition-new(root)",
-          }
-        );
-        break;
+          case "round-morph":
+            document.documentElement.animate(
+              [
+                { opacity: 0, transform: "scale(0.8) rotate(5deg)" },
+                { opacity: 1, transform: "scale(1) rotate(0deg)" },
+              ],
+              {
+                duration: duration * 1.2,
+                easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                pseudoElement: "::view-transition-new(root)",
+              }
+            );
+            break;
 
-      case "swipe-right":
-        document.documentElement.animate(
-          {
-            clipPath: [
-              `inset(0 ${viewportWidth}px 0 0)`,
-              `inset(0 0 0 0)`,
-            ],
-          },
-          {
-            duration,
-            easing: "cubic-bezier(0.2, 0, 0, 1)",
-            pseudoElement: "::view-transition-new(root)",
-          }
-        );
-        break;
+          case "swipe-left":
+            document.documentElement.animate(
+              {
+                clipPath: [
+                  `inset(0 0 0 ${viewportWidth}px)`,
+                  `inset(0 0 0 0)`,
+                ],
+              },
+              {
+                duration,
+                easing: "cubic-bezier(0.2, 0, 0, 1)",
+                pseudoElement: "::view-transition-new(root)",
+              }
+            );
+            break;
 
-      case "swipe-up":
-        document.documentElement.animate(
-          {
-            clipPath: [
-              `inset(${viewportHeight}px 0 0 0)`,
-              `inset(0 0 0 0)`,
-            ],
-          },
-          {
-            duration,
-            easing: "cubic-bezier(0.2, 0, 0, 1)",
-            pseudoElement: "::view-transition-new(root)",
-          }
-        );
-        break;
+          case "swipe-right":
+            document.documentElement.animate(
+              {
+                clipPath: [
+                  `inset(0 ${viewportWidth}px 0 0)`,
+                  `inset(0 0 0 0)`,
+                ],
+              },
+              {
+                duration,
+                easing: "cubic-bezier(0.2, 0, 0, 1)",
+                pseudoElement: "::view-transition-new(root)",
+              }
+            );
+            break;
 
-      case "swipe-down":
-        document.documentElement.animate(
-          {
-            clipPath: [
-              `inset(0 0 ${viewportHeight}px 0)`,
-              `inset(0 0 0 0)`,
-            ],
-          },
-          {
-            duration,
-            easing: "cubic-bezier(0.2, 0, 0, 1)",
-            pseudoElement: "::view-transition-new(root)",
-          }
-        );
-        break;
+          case "swipe-up":
+            document.documentElement.animate(
+              {
+                clipPath: [
+                  `inset(${viewportHeight}px 0 0 0)`,
+                  `inset(0 0 0 0)`,
+                ],
+              },
+              {
+                duration,
+                easing: "cubic-bezier(0.2, 0, 0, 1)",
+                pseudoElement: "::view-transition-new(root)",
+              }
+            );
+            break;
 
-      case "diag-down-right":
-        document.documentElement.animate(
-          {
-            clipPath: [
-              `polygon(0 0, 0 0, 0 0, 0 0)`,
-              `polygon(0 0, 100% 0, 100% 100%, 0 100%)`,
-            ],
-          },
-          {
-            duration: duration * 1.3,
-            easing: "cubic-bezier(0.4, 0, 0.2, 1)",
-            pseudoElement: "::view-transition-new(root)",
-          }
-        );
-        break;
+          case "swipe-down":
+            document.documentElement.animate(
+              {
+                clipPath: [
+                  `inset(0 0 ${viewportHeight}px 0)`,
+                  `inset(0 0 0 0)`,
+                ],
+              },
+              {
+                duration,
+                easing: "cubic-bezier(0.2, 0, 0, 1)",
+                pseudoElement: "::view-transition-new(root)",
+              }
+            );
+            break;
 
-      case "fade-in-out":
-        document.documentElement.animate(
-          {
-            opacity: [0, 1],
-          },
-          {
-            duration: duration * 0.7,
-            easing: "ease-in-out",
-            pseudoElement: "::view-transition-new(root)",
-          }
-        );
-        break;
+          case "diag-down-right":
+            document.documentElement.animate(
+              {
+                clipPath: [
+                  `polygon(0 0, 0 0, 0 0, 0 0)`,
+                  `polygon(0 0, 100% 0, 100% 100%, 0 100%)`,
+                ],
+              },
+              {
+                duration,
+                easing: "cubic-bezier(0.2, 0, 0, 1)",
+                pseudoElement: "::view-transition-new(root)",
+              }
+            );
+            break;
 
-      case "shrink-grow":
-        document.documentElement.animate(
-          [
-            { transform: "scale(0.9)", opacity: 0 },
-            { transform: "scale(1)", opacity: 1 },
-          ],
-          {
-            duration: duration * 1.2,
-            easing: "cubic-bezier(0.19, 1, 0.22, 1)",
-            pseudoElement: "::view-transition-new(root)",
-          }
-        );
-        break;
+          case "fade-in-out":
+            document.documentElement.animate(
+              [{ opacity: 0 }, { opacity: 1 }],
+              {
+                duration,
+                easing: "ease-in-out",
+                pseudoElement: "::view-transition-new(root)",
+              }
+            );
+            break;
 
-      case "flip-x-in":
-        document.documentElement.animate(
-          [
-            { transform: "rotateY(90deg)", opacity: 0 },
-            { transform: "rotateY(0deg)", opacity: 1 },
-          ],
-          {
-            duration: duration * 1.1,
-            easing: "ease-out",
-            pseudoElement: "::view-transition-new(root)",
-          }
-        );
-        break;
+          case "shrink-grow":
+            document.documentElement.animate(
+              [
+                { transform: "scale(0.9)", opacity: 0 },
+                { transform: "scale(1)", opacity: 1 },
+              ],
+              {
+                duration,
+                easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+                pseudoElement: "::view-transition-new(root)",
+              }
+            );
+            break;
 
-      case "split-vertical":
-        document.documentElement.animate(
-          {
-            clipPath: [
-              `inset(50% 0 50% 0)`,
-              `inset(0 0 0 0)`,
-            ],
-          },
-          {
-            duration: duration * 1.3,
-            easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
-            pseudoElement: "::view-transition-new(root)",
-          }
-        );
-        break;
+          case "wave-ripple":
+            document.documentElement.animate(
+              {
+                clipPath: [
+                  `circle(0% at ${x}px ${y}px)`,
+                  `circle(50% at ${x}px ${y}px)`,
+                  `circle(100% at ${x}px ${y}px)`,
+                ],
+              },
+              {
+                duration: duration * 1.2,
+                easing: "ease-out",
+                pseudoElement: "::view-transition-new(root)",
+              }
+            );
+            break;
 
-      case "wave-ripple":
-        document.documentElement.animate(
-          {
-            clipPath: [
-              `circle(0% at 50% 50%)`,
-              `circle(${maxRadius}px at 50% 50%)`,
-            ],
-          },
-          {
-            duration: duration * 1.3,
-            easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
-            pseudoElement: "::view-transition-new(root)",
-          }
-        );
-        break;
+          case "split-vertical":
+            document.documentElement.animate(
+              {
+                clipPath: [
+                  `polygon(0 50%, 100% 50%, 100% 50%, 0 50%)`,
+                  `polygon(0 0, 100% 0, 100% 100%, 0 100%)`,
+                ],
+              },
+              {
+                duration,
+                easing: "cubic-bezier(0.2, 0, 0, 1)",
+                pseudoElement: "::view-transition-new(root)",
+              }
+            );
+            break;
 
-      case "none":
-      default:
-        break;
+          case "flip-x-in":
+            document.documentElement.animate(
+              [
+                { transform: "rotateY(90deg)", opacity: 0 },
+                { transform: "rotateY(0deg)", opacity: 1 },
+              ],
+              {
+                duration: duration * 1.3,
+                easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                pseudoElement: "::view-transition-new(root)",
+              }
+            );
+            break;
+
+          case "none":
+          default:
+            break;
+        }
+      } catch {
+        // Mobile Safari WebKit doesn't support pseudoElement in Web Animations API
+      }
+    } catch {
+      // If startViewTransition fails, apply immediately
+      applyTheme(newTheme);
     }
-  }, [isDark, duration, animationType]);
+  }, [isDark, duration, animationType, applyTheme]);
 
   return (
     <button

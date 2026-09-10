@@ -20,18 +20,17 @@ function useDockItemSize(
   spring: { mass: number; stiffness: number; damping: number }
 ) {
   const mouseDistance = useTransform(mouseX, (val) => {
-    if (typeof val !== "number" || isNaN(val)) return 0;
-    const rect = ref.current?.getBoundingClientRect() ?? {
-      x: 0,
-      width: baseItemSize,
-    };
-    return val - rect.x - baseItemSize / 2;
+    if (typeof val !== "number" || isNaN(val) || !isFinite(val)) return Infinity;
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return Infinity;
+    return val - (rect.x + rect.width / 2);
   });
 
   const targetSize = useTransform(
     mouseDistance,
     [-distance, 0, distance],
-    [baseItemSize, magnification, baseItemSize]
+    [baseItemSize, magnification, baseItemSize],
+    { clamp: true }
   );
 
   return useSpring(targetSize, spring);
@@ -97,6 +96,7 @@ function DockItem({
     <motion.div
       ref={ref}
       style={{ width: size, height: size }}
+      whileTap={{ scale: 0.92 }}
       onHoverStart={() => isHovered.set(1)}
       onHoverEnd={() => isHovered.set(0)}
       onFocus={() => isHovered.set(1)}
@@ -245,34 +245,35 @@ export default function Dock({
   return (
     <motion.div
       style={{ height: animatedHeight }}
-      className="mx-2 flex max-w-full items-center justify-center"
+      className="mx-2 flex max-w-full items-end justify-center pointer-events-none"
     >
       <motion.div
-        onMouseMove={({ pageX }) => {
+        onMouseMove={({ clientX }) => {
           isHovered.set(1);
-          mouseX.set(pageX);
+          mouseX.set(clientX);
         }}
         onMouseLeave={() => {
           isHovered.set(0);
           mouseX.set(Infinity);
         }}
         className={cn(
-          "absolute bottom-2 left-1/2 -translate-x-1/2 transform flex items-center justify-center w-fit transition-all duration-300",
+          "pointer-events-auto flex items-end justify-center w-fit",
           multiBorder
-            ? "p-[3px] rounded-[24px] sm:rounded-[28px] border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/80 dark:bg-zinc-900/80 shadow-lg backdrop-blur-xl"
+            ? "p-[3px] rounded-[24px] sm:rounded-[28px] border border-white/50 dark:border-white/10 bg-white/75 dark:bg-zinc-900/75 shadow-[0_16px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.45)] backdrop-blur-2xl relative"
             : "",
           className
         )}
-        style={{ height: panelHeight }}
         role="toolbar"
         aria-label="Application dock"
       >
+        {/* Specular Highlight Rim */}
+        <div className="absolute top-0 inset-x-6 h-[1px] bg-gradient-to-r from-transparent via-white/70 dark:via-white/20 to-transparent pointer-events-none" />
         <div
           className={cn(
-            "flex items-end w-fit rounded-[20px] sm:rounded-[24px] px-4 pb-2 h-full transition-all duration-300",
+            "flex items-end w-fit rounded-[20px] sm:rounded-[24px] px-3.5 pb-2 pt-2",
             gap,
             multiBorder
-              ? "border border-zinc-200/90 dark:border-zinc-800/90 bg-white/90 dark:bg-black/90 shadow-inner"
+              ? "border border-zinc-200/60 dark:border-zinc-800/60 bg-white/80 dark:bg-black/70 shadow-inner"
               : blurBackground
               ? "bg-white/10 dark:bg-black/20 backdrop-blur-xl border-2 border-white/20 dark:border-white/10 shadow-md"
               : "bg-background border-2 border-border shadow-md"

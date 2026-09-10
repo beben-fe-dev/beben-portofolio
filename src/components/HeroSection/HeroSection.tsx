@@ -9,10 +9,27 @@ import { HangingIdCard } from "../lightswind/HangingIdCard";
 
 export const HeroSection = () => {
   return (
-    <section id="hero" className="relative min-h-dvh flex flex-col justify-center pt-8 md:pt-14 overflow-hidden bg-background">
+    <section id="hero" className="relative min-h-dvh flex flex-col justify-center pt-24 sm:pt-28 md:pt-14 overflow-hidden bg-background">
       {/* Background Dot Pattern with Radial Vignette Shade */}
       <DotPattern width={18} height={18} cx={1} cy={1} cr={1} glow />
       
+      {/* Dynamic Responsive Apple Ambient Lighting Orbs */}
+      <motion.div
+        animate={{ scale: [1, 1.08, 1], opacity: [0.18, 0.28, 0.18] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-20 -left-16 sm:-top-28 sm:-left-24 w-72 h-72 sm:w-[30rem] sm:h-[30rem] bg-gradient-to-br from-sky-400/25 via-blue-400/15 to-transparent dark:from-sky-500/20 dark:via-primary/15 dark:to-transparent rounded-full blur-3xl pointer-events-none -z-10"
+      />
+      <motion.div
+        animate={{ scale: [1, 1.12, 1], opacity: [0.14, 0.24, 0.14] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute top-1/4 -right-16 sm:-right-24 w-80 h-80 sm:w-[32rem] sm:h-[32rem] bg-gradient-to-bl from-purple-400/20 via-pink-400/10 to-transparent dark:from-purple-600/20 dark:via-indigo-500/15 dark:to-transparent rounded-full blur-3xl pointer-events-none -z-10"
+      />
+      <motion.div
+        animate={{ scale: [1, 1.06, 1], opacity: [0.1, 0.2, 0.1] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="absolute -bottom-16 left-1/3 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-t from-sky-300/15 to-transparent dark:from-sky-900/15 rounded-full blur-3xl pointer-events-none -z-10"
+      />
+
       {/* Main Content Area */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-14 pb-12">
         
@@ -21,16 +38,18 @@ export const HeroSection = () => {
           className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left max-w-2xl"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* Status Badge */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.15, duration: 0.4 }}
-            className="mb-6"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            className="mb-6 cursor-default"
           >
-            <Badge variant="outline" size="lg" className="gap-2.5 py-1.5 px-4 glass-panel border-border/80">
+            <Badge variant="outline" size="lg" className="gap-2.5 py-1.5 px-4 glass-panel border-border/80 relative overflow-hidden shadow-sm">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -43,13 +62,13 @@ export const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25, duration: 0.6 }}
+            transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="mb-5"
           >
             <span className="text-xs uppercase tracking-widest text-primary font-bold mb-3 block">
               Bento Putra Hermanto · 7+ Years Experience
             </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground leading-[1.08] mb-2">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-[-0.03em] text-foreground leading-[1.08] mb-2">
               Architecting systems. <br className="hidden sm:inline" />
               <span className="text-gradient-primary">Crafting interfaces.</span>
             </h1>
@@ -59,28 +78,44 @@ export const HeroSection = () => {
             className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8 w-full max-w-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.35, duration: 0.6 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
           >
             Senior Frontend Engineer specialized in scalable component architecture, <b>React Native (iOS &amp; Android)</b> mobile apps, low-bandwidth offline suites, and high-volume e-commerce and insurtech platforms.
           </motion.p>
 
-          {/* CTAs */}
+          {/* CTAs with Apple Spring Feedback & Subtle Sheen */}
           <motion.div 
             className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-8 w-full sm:w-auto"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45, duration: 0.6 }}
+            transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            <a href="#projects">
-              <Button size="lg" className="rounded-full px-7 h-12 bg-primary text-primary-foreground font-semibold flex items-center gap-2 hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5">
-                Explore Selected Works <ArrowRight className="w-4 h-4" />
+            <motion.a
+              href="#projects"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 450, damping: 25 }}
+            >
+              <Button size="lg" className="relative overflow-hidden group/btn rounded-full px-7 h-12 bg-primary text-primary-foreground font-semibold flex items-center gap-2 shadow-lg shadow-primary/25 hover:shadow-primary/35 transition-shadow">
+                <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
+                <span className="relative z-10">Explore Selected Works</span>
+                <ArrowRight className="w-4 h-4 relative z-10 group-hover/btn:translate-x-1 transition-transform duration-200" />
               </Button>
-            </a>
-            <a href="https://wa.me/62859106530700" target="_blank" rel="noopener noreferrer">
-              <Button size="lg" variant="outline" className="rounded-full px-7 h-12 glass-panel text-foreground font-semibold flex items-center gap-2 hover:bg-foreground/5 transition-all hover:-translate-y-0.5 border-border/80">
-                Direct WhatsApp <Mail className="w-4 h-4" />
+            </motion.a>
+            <motion.a
+              href="https://wa.me/62859106530700"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 450, damping: 25 }}
+            >
+              <Button size="lg" variant="outline" className="relative overflow-hidden group/btn2 rounded-full px-7 h-12 glass-panel text-foreground font-semibold flex items-center gap-2 border-border/80 shadow-sm hover:border-primary/40 transition-colors">
+                <span className="absolute inset-0 -translate-x-full group-hover/btn2:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-foreground/5 to-transparent pointer-events-none" />
+                <span className="relative z-10">Direct WhatsApp</span>
+                <Mail className="w-4 h-4 relative z-10" />
               </Button>
-            </a>
+            </motion.a>
           </motion.div>
 
           {/* Direct Social Links */}
@@ -88,14 +123,30 @@ export const HeroSection = () => {
             className="flex items-center gap-5 justify-center lg:justify-start w-full"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.55, duration: 0.6 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
           >
-            <a href="https://github.com/beben-fe-dev" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors p-1" title="GitHub">
+            <motion.a
+              href="https://github.com/beben-fe-dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.15, y: -1 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              className="text-muted-foreground hover:text-foreground transition-colors p-1"
+              title="GitHub"
+            >
               <Github className="w-5 h-5" />
-            </a>
-            <a href="mailto:bentoputrahermanto@gmail.com" className="text-muted-foreground hover:text-foreground transition-colors p-1" title="Email">
+            </motion.a>
+            <motion.a
+              href="mailto:bentoputrahermanto@gmail.com"
+              whileHover={{ scale: 1.15, y: -1 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              className="text-muted-foreground hover:text-foreground transition-colors p-1"
+              title="Email"
+            >
               <Mail className="w-5 h-5" />
-            </a>
+            </motion.a>
             <span className="text-xs text-muted-foreground/60 font-mono">
               Jakarta, Indonesia · CS Graduate (GPA 3.58)
             </span>
@@ -132,10 +183,10 @@ export const HeroSection = () => {
                   </div>
                 </div>
 
-                <h3 className="font-extrabold text-lg dark:text-white text-black/90 tracking-tight drop-shadow-sm text-center">
+                <h3 className="font-extrabold text-lg text-white tracking-tight drop-shadow-sm text-center">
                   Bento Putra Hermanto
                 </h3>
-                <p className="dark:text-white/80 text-black/80 font-medium text-xs mt-0.5 text-center">
+                <p className="text-white/85 font-medium text-xs mt-0.5 text-center">
                   Senior Frontend &amp; Mobile Engineer
                 </p>
               </div>

@@ -70,7 +70,7 @@ export const CareerTimeline = () => {
   ];
 
   return (
-    <div id="career">
+    <div id="career" className="scroll-mt-20 md:scroll-mt-24">
       <ScrollTimeline
         events={careerEvents}
         title="Career Journey"

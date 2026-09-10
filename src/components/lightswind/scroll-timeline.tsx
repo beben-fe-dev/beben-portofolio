@@ -208,17 +208,23 @@ export const ScrollTimeline = ({
         className
       )}
     >
-      <div className="flex flex-col items-center text-center mb-16 pt-14 px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="flex flex-col items-center text-center mb-14 md:mb-16 pt-14 px-4"
+      >
         <span className="text-xs uppercase tracking-widest text-primary font-bold mb-3 inline-block">
           Career Timeline
         </span>
-        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground tracking-[-0.02em]">
           Professional <span className="text-gradient-primary">Experience</span>
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
           {subtitle}
         </p>
-      </div>
+      </motion.div>
 
       <div className="relative max-w-7xl mx-auto px-4 pb-24">
         <div className="relative mx-auto">

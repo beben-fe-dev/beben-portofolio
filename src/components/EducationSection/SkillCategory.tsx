@@ -91,17 +91,23 @@ export default function ProfessionalProfile() {
       }}
       viewport={{ once: true, amount: 0.2 }}
     >
-      <div className="flex flex-col items-center text-center mb-16">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="flex flex-col items-center text-center mb-14 md:mb-16"
+      >
         <span className="text-xs uppercase tracking-widest text-primary font-bold mb-3 inline-block">
           Engineering Proficiencies
         </span>
-        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground tracking-[-0.02em]">
           Core Stack &amp; <span className="text-gradient-primary">Capabilities</span>
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
           Mastery across modern web frameworks, React Native mobile applications, reactive state engines, and frontend craftsmanship.
         </p>
-      </div>
+      </motion.div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Technical Skills */}

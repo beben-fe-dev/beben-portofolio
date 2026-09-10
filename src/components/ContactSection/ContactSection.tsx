@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, MapPin, Mail, Phone, MessageSquare, Check, Copy } from "lucide-react";
+import { Send, MapPin, Mail, MessageSquare, Check } from "lucide-react";
 import { Input } from "../lightswind/input";
 import { Textarea } from "../lightswind/textarea";
 import { Button } from "../lightswind/button";
@@ -23,32 +23,47 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="max-w-7xl mx-auto px-6 py-24">
+    <section id="contact" className="max-w-7xl mx-auto px-6 py-24 scroll-mt-20 md:scroll-mt-24">
+      {/* Standard Apple Centered Section Header */}
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="flex flex-col items-center text-center mb-14 md:mb-16"
+      >
+        <span className="text-xs uppercase tracking-widest text-primary font-bold mb-3 inline-block">
+          Initiate Conversation
+        </span>
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground tracking-[-0.02em]">
+          Let's <span className="text-gradient-primary">Connect</span>
+        </h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+          Currently open for senior engineering roles, architecture consulting, and exciting venture collaborations.
+        </p>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.8 }}
-        className="glass-panel p-8 md:p-12 rounded-[3rem] border border-foreground/10 relative overflow-hidden"
+        className="glass-panel p-8 md:p-12 rounded-[2.5rem] border border-border/80 relative overflow-hidden shadow-xl"
       >
         {/* Background Gradients */}
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/20 blur-[100px] rounded-full pointer-events-none" />
         <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col md:flex-row gap-12 md:gap-24">
+        <div className="relative z-10 flex flex-col md:flex-row gap-12 md:gap-16">
           
           {/* Contact Info */}
           <div className="flex-1 space-y-8 text-left">
             <div>
-              <span className="text-xs uppercase tracking-widest text-sky-400 font-bold mb-3 inline-block">
-                Initiate Conversation
-              </span>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-                Let's <span className="text-gradient-primary">Connect</span>
-              </h2>
-              <p className="text-muted-foreground">
-                Currently open for senior engineering roles, architecture consulting, and exciting venture collaborations. 
-                Whether you have an ambitious platform to scale or just want to discuss frontend craft, reach out directly!
+              <h3 className="text-2xl font-bold tracking-tight mb-3 text-foreground">
+                Get in Touch Directly
+              </h3>
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                Whether you have an ambitious platform to scale, need architectural consultation, or just want to discuss frontend craft, reach out directly via the channels below.
               </p>
             </div>
 

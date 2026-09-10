@@ -1,6 +1,6 @@
 import SkillCategory from "./SkillCategory";
 import { motion } from "framer-motion";
-import { GraduationCap, BookOpen, Award, CheckCircle2, Calendar, Building2, Sparkles, Layers } from "lucide-react";
+import { GraduationCap, BookOpen, Award, CheckCircle2, Calendar, Building2, Sparkles } from "lucide-react";
 import { MagicCard } from "../lightswind/magic-card";
 
 export const EducationSection = () => {
@@ -38,21 +38,21 @@ export const EducationSection = () => {
   ];
 
   return (
-    <section id="education" className="max-w-7xl mx-auto px-6 py-24 space-y-20">
+    <section id="education" className="max-w-7xl mx-auto px-6 py-24 space-y-20 scroll-mt-20 md:scroll-mt-24">
       
       {/* Education Header & Cards */}
       <div>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="flex flex-col items-center text-center mb-16"
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-center text-center mb-14 md:mb-16"
         >
           <span className="text-xs uppercase tracking-widest text-primary font-bold mb-3 inline-block">
             Academic Foundation
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground tracking-[-0.02em]">
             Educational <span className="text-gradient-primary">Background</span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
